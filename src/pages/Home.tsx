@@ -6,9 +6,11 @@ import SolutionSection from '../components/sections/SolutionSection'
 const Home: React.FC = () => (
   <>
     <Navbar />
-    <HeroSection />
-    <ProblemSection />
-    <SolutionSection />
+    <main id="main-content">
+      <HeroSection />
+      <ProblemSection />
+      <SolutionSection />
+    </main>
   </>
 )
 
