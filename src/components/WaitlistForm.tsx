@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 
 // TODO: Replace REPLACE_ME with your real Formspree form ID from https://formspree.io
 const FORMSPREE_URL = 'https://formspree.io/f/REPLACE_ME'
