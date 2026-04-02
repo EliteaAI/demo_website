@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  :focus-visible {
-    outline: 2px solid #ffdd33;
-    outline-offset: 2px;
-  }
+  html { scroll-behavior: smooth; }
+  body { @apply font-body bg-white text-gray-900 overflow-x-hidden; }
 }
