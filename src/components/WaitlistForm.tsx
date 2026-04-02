@@ -13,7 +13,7 @@ export default function WaitlistForm({ variant = 'hero', formId = 'waitlist-form
   if (status === 'success') {
     return (
       <div role="status" aria-live="polite" className="text-white bg-green-500/20 border-2 border-green-500 rounded-lg p-4">
-        <p className="font-semibold">You are in! We will notify you the moment hardware ships with early-access pricing.</p>
+        <p className="font-semibold">✅ You're in! We'll notify you the moment hardware ships — with early-access pricing.</p>
       </div>
     );
   }
@@ -35,22 +35,20 @@ export default function WaitlistForm({ variant = 'hero', formId = 'waitlist-form
         placeholder="your@email.com"
         autoComplete="email"
         aria-required="true"
-        aria-describedby={status === 'error' ? errorId : undefined}
         aria-invalid={status === 'error' ? 'true' : undefined}
+        aria-describedby={status === 'error' ? errorId : undefined}
         disabled={status === 'loading'}
-        className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg text-gray-900 focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/20 disabled:opacity-50"
+        className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg text-gray-900 focus:border-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/20 disabled:opacity-50"
       />
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="bg-orange-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50 whitespace-nowrap"
+        className="bg-brand-orange text-white font-semibold px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors disabled:opacity-50 whitespace-nowrap"
       >
         {status === 'loading' ? 'Joining...' : 'Claim My Spot'}
       </button>
       {status === 'error' && errorMessage && (
-        <div id={errorId} role="alert" aria-live="assertive" className="text-red-400 text-sm">
-          {errorMessage}
-        </div>
+        <div id={errorId} role="alert" className="text-red-400 text-sm">{errorMessage}</div>
       )}
     </form>
   );

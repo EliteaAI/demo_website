@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <main id="home">
+    <main id="main-content">
       <HeroSection />
       <ProblemSection />
       <TriangleSection />
