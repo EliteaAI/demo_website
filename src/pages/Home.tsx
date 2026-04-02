@@ -1,17 +1,23 @@
-import Navbar from '../components/Navbar'
-import HeroSection from '../components/sections/HeroSection'
-import ProblemSection from '../components/sections/ProblemSection'
-import SolutionSection from '../components/sections/SolutionSection'
+import HeroSection from '../components/HeroSection';
+import ProblemSection from '../components/ProblemSection';
+import TriangleSection from '../components/TriangleSection';
+import HowItWorksSection from '../components/HowItWorksSection';
+import PricingSection from '../components/PricingSection';
+import TestimonialsSection from '../components/TestimonialsSection';
+import BottomCTASection from '../components/BottomCTASection';
+import Footer from '../components/Footer';
 
-const Home: React.FC = () => (
-  <>
-    <Navbar />
-    <main id="main-content">
+export default function Home() {
+  return (
+    <main id="home">
       <HeroSection />
       <ProblemSection />
-      <SolutionSection />
+      <TriangleSection />
+      <HowItWorksSection />
+      <PricingSection />
+      <TestimonialsSection />
+      <BottomCTASection />
+      <Footer />
     </main>
-  </>
-)
-
-export default Home
+  );
+}

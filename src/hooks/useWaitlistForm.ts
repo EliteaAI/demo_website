@@ -1,60 +1,54 @@
-import { useState } from 'react'
+import { useState, FormEvent } from 'react';
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-interface WaitlistFormState {
-  email: string
-  isSubmitting: boolean
-  isSuccess: boolean
-  error: string
+interface UseWaitlistFormReturn {
+  email: string;
+  setEmail: (value: string) => void;
+  status: 'idle' | 'loading' | 'success' | 'error';
+  errorMessage: string | null;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
-interface WaitlistFormActions {
-  setEmail: (email: string) => void
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>
-}
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwkgvqpd';
 
-export function useWaitlistForm(): WaitlistFormState & WaitlistFormActions {
-  const [email, setEmail] = useState<string>('')
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-  const [isSuccess, setIsSuccess] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
+export function useWaitlistForm(): UseWaitlistFormReturn {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setError('')
-
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!email.trim()) {
-      setError('Please enter your email address')
-      return
+      setStatus('error');
+      setErrorMessage('Email address is required.');
+      return;
     }
-
     if (!EMAIL_REGEX.test(email)) {
-      setError('Please enter a valid email address')
-      return
+      setStatus('error');
+      setErrorMessage('Please enter a valid email address.');
+      return;
     }
-
-    setIsSubmitting(true)
+    setErrorMessage(null);
+    setStatus('loading');
     try {
-      const endpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT
-      if (endpoint) {
-        await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        })
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (response.ok) {
+        setStatus('success');
+        setEmail('');
       } else {
-        // No backend yet — log and simulate success
-        console.log('[WaitlistForm] Email submitted:', email)
-        await new Promise((resolve) => setTimeout(resolve, 400))
+        setStatus('error');
+        setErrorMessage('Something went wrong. Please try again.');
       }
-      setIsSuccess(true)
-    } catch (err) {
-      setError('Something went wrong. Please try again.')
-    } finally {
-      setIsSubmitting(false)
+    } catch (error) {
+      console.error('Waitlist form error:', error);
+      setStatus('error');
+      setErrorMessage('Network error. Please check your connection and try again.');
     }
-  }
+  };
 
-  return { email, isSubmitting, isSuccess, error, setEmail, handleSubmit }
+  return { email, setEmail, status, errorMessage, handleSubmit };
 }

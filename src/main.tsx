@@ -1,14 +1,10 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { HashRouter } from "react-router-dom";
-import CssBaseline from "@mui/material/CssBaseline";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <CssBaseline />
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </StrictMode>
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
 );

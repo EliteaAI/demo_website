@@ -1,19 +1,18 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'
-import Layout from './Layout'
-import Home from './pages/Home'
-import About from './pages/About'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-        </Route>
-      </Routes>
-    </Router>
-  )
+    <div className="overflow-x-hidden">
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </div>
+  );
 }
 
-export default App
+export default App;

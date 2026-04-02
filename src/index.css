@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :focus-visible {
-    outline: 2px solid #ffdd33;
-    outline-offset: 2px;
-  }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #111827;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
