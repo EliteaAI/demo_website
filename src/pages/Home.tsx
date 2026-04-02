@@ -1,19 +1,15 @@
 import Navbar from '../components/Navbar'
+import HeroSection from '../components/sections/HeroSection'
+import ProblemSection from '../components/sections/ProblemSection'
+import SolutionSection from '../components/sections/SolutionSection'
 
-export default function Home() {
-  return (
-    <>
-      <Navbar />
-      <main id="main-content" className="pt-16">
-        {/* Hero */}
-        {/* ProblemSection */}
-        {/* TriangleSection */}
-        {/* HowItWorks */}
-        {/* ProductDetails */}
-        {/* SocialProof */}
-        {/* BottomCTA */}
-        {/* Footer */}
-      </main>
-    </>
-  )
-}
+const Home: React.FC = () => (
+  <>
+    <Navbar />
+    <HeroSection />
+    <ProblemSection />
+    <SolutionSection />
+  </>
+)
+
+export default Home
