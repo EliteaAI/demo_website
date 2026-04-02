@@ -1,15 +1,12 @@
-import { Routes, Route } from "react-router-dom";
-import Layout from "./Layout";
-import Home from "./pages/Home";
-import About from "./pages/About";
+import { HashRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-      </Route>
-    </Routes>
-  );
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </HashRouter>
+  )
 }
